@@ -1,0 +1,43 @@
+{
+  "name": "cordova-background-geolocation-firebase",
+  "version": "0.0.1",
+  "description": "Firebase Adapter for cordova-background-geolocation",
+  "cordova": {
+    "id": "cordova-background-geolocation-firebase",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/transistorsoft/cordova-background-geolocation-firebase.git"
+  },
+  "keywords": [
+    "cordova",
+    "background",
+    "geolocation",
+    "firebase"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/transistorsoft/cordova-background-geolocation-firebase/issues"
+  },
+  "homepage": "https://github.com/transistorsoft/cordova-background-geolocation-firebase",
+
+  "engines": {
+    "cordovaDependencies": {
+      "<5.4.0": {
+        "cordova": ">=6.4.0",
+        "cordova-android": ">=6.0.0",
+        "cordova-ios": ">=4.3.0"
+      },
+      "5.4.0": {
+        "cordova": ">=7.1.0",
+        "cordova-android": ">=7.0.0",
+        "cordova-ios": ">=4.4.0"
+      }
+    }
+  },
+  "author": "Chris Scott, Transistor Software <chris@transistorsoft.com>"
+}
