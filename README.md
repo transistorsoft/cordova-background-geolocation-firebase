@@ -15,6 +15,13 @@ The **[Android module](https://shop.transistorsoft.com/collections/frontpage/pro
 
 ----------------------------------------------------------------------------
 
+# Contents
+- ### [Configuration Options](#large_blue_diamond-configuration-options)
+- ### [Installing the Plugin](#large_blue_diamond-installing-the-plugin)
+- ### [Setup Guide](#large_blue_diamond-setup-guide)
+- ### [Using the plugin](#large_blue_diamond-using-the-plugin)
+- ### [Example](#large_blue_diamond-example)
+
 ## :large_blue_diamond: Installing the Plugin
 
 ### From npm
@@ -25,7 +32,7 @@ $ cordova plugin add cordova-background-geolocation-firebase --save
 
 ## :large_blue_diamond: Setup Guide
 
-You also need to download **`google-services.json`** on Android and **`GoogleService-Info.plist`** on iOS from **Firebase Console**.  Place them into the cordova project root folder. Then use `<resource-file>`` to copy those files into appropriate folders:
+You also need to download **`google-services.json`** on Android and **`GoogleService-Info.plist`** on iOS from **Firebase Console**.  Place them into the cordova project root folder. Then use `<resource-file>` to copy those files into appropriate folders:
 
 ```xml
 <platform name="android">
@@ -38,7 +45,37 @@ You also need to download **`google-services.json`** on Android and **`GoogleSer
 </platform>
 ```
 
-## :large_blue_diamond: Configure your license
+### iOS
+
+This plugin imports iOS `Firebase` dependencies via **Cocoapods**.  If you're unfamiliar with **Cocoapods**, [see here](https://guides.cocoapods.org/using/getting-started.html) to ensure you have it setup on your system.
+
+After installing the plugin and adding the iOS platform, you must execute `$ pod install`:
+
+```
+$ cd platforms/ios
+$ pod install
+```
+
+:warning: If you haven't update your pods in a while:
+```
+$ pod update
+```
+
+:warning: There's a cordova build issue I haven't yet been able to figure out:  `cordova build ios` **will no longer work**:
+
+```
+$ cordova build ios
+
+ fatal error:
+      'RxLibrary/GRXWriteable.h' file not found
+#import <RxLibrary/GRXWriteable.h>
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+```
+
+As a result, you'll have to build your app using XCode from **`YourProject.xcworkspace`** (**not** `YourProject.xcodeproj`).
+
+### Configure your license
 
 :information_source: If you don't *have* a license yet, the plugin is fully functional in `DEBUG` builds so you can try it before [purchasing a license](https://shop.transistorsoft.com/collections/frontpage/products/background-geolocation-firebase).
 
@@ -58,7 +95,7 @@ $ cordova plugin add cordova-background-geolocation-firebase --variable LICENSE=
 The plugin creates the object **`window.BackgroundGeolocationFirebase`**.
 
 ```javascript
-var bgGeo = window.BackgroundGeolocationFirebase;
+var bgGeoFirebase = window.BackgroundGeolocationFirebase;
 ```
 
 ### Ionic 2+:
@@ -115,9 +152,9 @@ export class HomePage {
   }
 
   configureBackgroundGeolocation() {
-    let firebase = (<any>window).BackgroundGeolocationFirebase;
+    let bgGeoFirebase = (<any>window).BackgroundGeolocationFirebase;
 
-    firebase.configure({
+    bgGeoFirebase.configure({
       locationsCollection: 'locations',
       geofencesCollection: 'geofences'
     });
@@ -154,7 +191,7 @@ export class HomePage {
 }
 ```
 
-You should implement your own [Firebase Functions]() to "*massage*" the incoming data in your collection as desired.  For example:
+You should implement your own [Firebase Functions](https://firebase.google.com/docs/functions/) to "*massage*" the incoming data in your collection as desired.  For example:
 
 ```typescript
 import * as functions from 'firebase-functions';

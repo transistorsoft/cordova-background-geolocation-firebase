@@ -30,8 +30,10 @@
                 <param name="onload" value="true"/>
             </feature>
         </config-file>
-
-        <!-- <framework src="src/ios/TSBackgroundFetch.framework" custom="true"/> -->
+        
+        <framework src="Firebase/Core" type="podspec" spec="" />
+        <framework src="Firebase/Firestore" type="podspec" spec="" />
+                
 
         <source-file src="src/ios/CDVBackgroundGeolocationFirebase.m" />
         <header-file src="src/ios/CDVBackgroundGeolocationFirebase.h" />
