@@ -1,0 +1,18 @@
+
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+}
+
+repositories{        
+  maven {
+    url '../app/libs'
+  }
+}
+
+
+dependencies {    
+    compile 'org.greenrobot:eventbus:3.0.0'    
+    compile(group: 'com.transistorsoft', name:'tsfirebaseproxy', version: '+')
+}

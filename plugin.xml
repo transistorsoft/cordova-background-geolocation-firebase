@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-background-geolocation-firebase"
+    version="0.0.1">
+    <name>CDVBackgroundGeolocationFirebase</name>
+    <description>Cordova Background Geolocation -- Firebase Adapter</description>
+    <license>MIT</license>
+    <repo>https://github.com/transistorsoft/cordova-background-geolocation-firebase</repo>
+    <issue>https://github.com/transistorsoft/cordova-background-geolocation-firebase/issues</issue>
+    <keywords>phonegap,cordova,background geolocation,firebase</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=7.1.0" />
+        <engine name="cordova-android" version=">=7.0.0"/>
+        <engine name="cordova-ios" version=">=4.4.0"/>
+    </engines>
+
+    <js-module src="www/BackgroundGeolocationFirebase.js" name="BackgroundGeolocationFirebase">
+        <clobbers target="window.BackgroundGeolocationFirebase" />
+    </js-module>
+
+    <dependency id="cordova-support-google-services" version="~1.2.0"/>
+
+    <platform name="ios">        
+        <config-file target="config.xml" parent="/*">
+            <feature name="BackgroundGeolocationFirebase">
+                <param name="ios-package" value="CDVBackgroundGeolocationFirebase"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+        
+        <framework src="Firebase/Core" type="podspec" spec="" />
+        <framework src="Firebase/Firestore" type="podspec" spec="" />
+                
+
+        <source-file src="src/ios/CDVBackgroundGeolocationFirebase.m" />
+        <header-file src="src/ios/CDVBackgroundGeolocationFirebase.h" />
+    </platform>
+
+    <platform name="android">
+        <preference name="LICENSE" default="YOUR_LICENSE_KEY" />
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data android:name="com.transistorsoft.firebaseproxy.license" android:value="$LICENSE" />
+        </config-file>
+
+        <preference name="FIREBASE_CORE_VERSION" default="16.0.1" />        
+        <framework src="com.google.firebase:firebase-core:$FIREBASE_CORE_VERSION" />
+
+        <preference name="FIREBASE_FIRESTORE_VERSION" default="17.1.0" />        
+        <framework src="com.google.firebase:firebase-firestore:$FIREBASE_FIRESTORE_VERSION" />
+
+        <resource-file src="src/android/libs/com/transistorsoft/tsfirebaseproxy" target="../../libs/com/transistorsoft/tsfirebaseproxy" />
+
+        <source-file src="src/android/CDVBackgroundGeolocationFirebase.java" target-dir="src/com/transistorsoft/cordova/bggeo" />
+        
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BackgroundGeolocationFirebase">
+                <param name="android-package" value="com.transistorsoft.cordova.bggeo.CDVBackgroundGeolocationFirebase"/>
+            </feature>
+        </config-file>        
+
+    </platform>
+
+</plugin>
