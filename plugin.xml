@@ -40,11 +40,6 @@
     </platform>
 
     <platform name="android">
-        <preference name="LICENSE" default="YOUR_LICENSE_KEY" />
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <meta-data android:name="com.transistorsoft.firebaseproxy.license" android:value="$LICENSE" />
-        </config-file>
-
         <preference name="FIREBASE_CORE_VERSION" default="16.0.9" />
         <framework src="com.google.firebase:firebase-core:$FIREBASE_CORE_VERSION" />
 
