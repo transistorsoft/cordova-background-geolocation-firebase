@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## [0.2.0] -- 2020-07-13
+* [Fixed][Android] `com.android.tools.build:gradle:4.0.0` no longer allows "*direct local aar dependencies*".
+
 ## [0.1.1] -- 2019-09-11
 - [iOS] Fix issue #11:  Provide defaults for `locationsCollection`, `geofencesCollection`
 - [Added] Capacitor support.

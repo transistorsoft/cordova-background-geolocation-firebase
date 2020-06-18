@@ -1,18 +1,25 @@
 def NAME = "cordova-background-geolocation-firebase"
 
-def userDir = System.getProperty("user.dir")
-def libDir = "${projectDir}/libs"
+def libDir = "${projectDir}/../../../plugins/${NAME}/src/android/libs"
 
-File capacitorConfig = new File("${userDir}/../capacitor.config.json")
+File capacitorConfig = new File("${projectDir}/../../capacitor.config.json")
 
 if (capacitorConfig.exists()) {
+	// Capacitor app detected.  libDir is from node_modules
+  def nodeModulesDir = (project.hasProperty("nodeModulesDirectory")) ? project.property("nodeModulesDirectory") : "../../node_modules"
+
   // Capacitor app
-  libDir = "${userDir}/../node_modules/${NAME}/src/android/libs"
+  libDir = "${projectDir}/${nodeModulesDir}/${NAME}/src/android/libs"
   println("[${NAME}] Capacitor detected")
 }
 
 println("[${NAME}] libDir: ${libDir}")
 
+repositories {
+	maven {
+    	url libDir
+  	}
+}
 
 android {
     defaultConfig {
@@ -22,5 +29,5 @@ android {
 
 dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation fileTree(include: ['*.aar'], dir: "${libDir}/tsfirebaseproxy")
+    implementation(group: 'com.transistorsoft', name:"tsfirebaseproxy", version: '+')
 }
