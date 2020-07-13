@@ -1,3 +1,25 @@
+def NAME = "cordova-background-geolocation-firebase"
+
+def libDir = "${projectDir}/../../../plugins/${NAME}/src/android/libs"
+
+File capacitorConfig = new File("${projectDir}/../../capacitor.config.json")
+
+if (capacitorConfig.exists()) {
+	// Capacitor app detected.  libDir is from node_modules
+  def nodeModulesDir = (project.hasProperty("nodeModulesDirectory")) ? project.property("nodeModulesDirectory") : "../../node_modules"
+
+  // Capacitor app
+  libDir = "${projectDir}/${nodeModulesDir}/${NAME}/src/android/libs"
+  println("[${NAME}] Capacitor detected")
+}
+
+println("[${NAME}] libDir: ${libDir}")
+
+repositories {
+	maven {
+    	url libDir
+  	}
+}
 
 android {
     defaultConfig {
@@ -5,14 +27,7 @@ android {
     }
 }
 
-repositories{        
-  maven {
-    url '../app/libs'
-  }
-}
-
-
-dependencies {    
-    compile 'org.greenrobot:eventbus:3.0.0'    
-    compile(group: 'com.transistorsoft', name:'tsfirebaseproxy', version: '+')
+dependencies {
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation(group: 'com.transistorsoft', name:"tsfirebaseproxy", version: '+')
 }

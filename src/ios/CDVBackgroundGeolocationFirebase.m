@@ -29,21 +29,19 @@ static NSString *const DEFAULT_GEOFENCES_COLLECTION = @"geofences";
 - (void)pluginInitialize
 {
     isRegistered = NO;
-    
+    _locationsCollection = DEFAULT_LOCATIONS_COLLECTION;
+    _geofencesCollection = DEFAULT_GEOFENCES_COLLECTION;
+    _updateSingleDocument = NO;
+
     if (![FIRApp defaultApp]) {
         [FIRApp configure];
-        
-        FIRFirestore *db = [FIRFirestore firestore];
-        FIRFirestoreSettings *settings = [db settings];
-        settings.timestampsInSnapshotsEnabled = YES;
-        [db setSettings:settings];
     }
 }
 
 - (void) configure:(CDVInvokedUrlCommand*)command
-{    
+{
     NSDictionary *config = [command.arguments objectAtIndex:0];
-    
+
     if (config[FIELD_LOCATIONS_COLLECTION]) {
         _locationsCollection = config[FIELD_LOCATIONS_COLLECTION];
     }
@@ -53,7 +51,7 @@ static NSString *const DEFAULT_GEOFENCES_COLLECTION = @"geofences";
     if (config[FIELD_UPDATE_SINGLE_DOCUMENT]) {
         _updateSingleDocument = [config[FIELD_UPDATE_SINGLE_DOCUMENT] boolValue];
     }
-    
+
     if (!isRegistered) {
         TSConfig *bgGeo = [TSConfig sharedInstance];
         [bgGeo registerPlugin:@"firebaseproxy"];
@@ -68,7 +66,7 @@ static NSString *const DEFAULT_GEOFENCES_COLLECTION = @"geofences";
 -(void) onPersist:(NSNotification*)notification {
     NSDictionary *data = notification.object;
     NSString *collectionName = (data[@"location"][@"geofence"]) ? _geofencesCollection : _locationsCollection;
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         FIRFirestore *db = [FIRFirestore firestore];
         // Add a new document with a generated ID
