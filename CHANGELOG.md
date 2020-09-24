@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## [0.2.1] -- 2020-09-24
+* [Fixed][Android] Incorrect path to tslocationmanager.aar after upgrade to gradle:4.0.0.
+
 ## [0.2.0] -- 2020-07-13
 * [Fixed][Android] `com.android.tools.build:gradle:4.0.0` no longer allows "*direct local aar dependencies*".
 
