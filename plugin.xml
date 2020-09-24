@@ -46,7 +46,7 @@
         <preference name="FIREBASE_FIRESTORE_VERSION" default="19.0.2" />
         <framework src="com.google.firebase:firebase-firestore:$FIREBASE_FIRESTORE_VERSION" />
 
-        <resource-file src="src/android/libs/tsfirebaseproxy" target="../../libs/tsfirebaseproxy" />
+        <resource-file src="src/android/libs/com/transistorsoft/tsfirebaseproxy" target="../../libs/com/transistorsoft/tsfirebaseproxy" />
 
         <source-file src="src/android/CDVBackgroundGeolocationFirebase.java" target-dir="src/com/transistorsoft/cordova/bggeo" />
 
