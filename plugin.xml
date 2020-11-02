@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-background-geolocation-firebase"
-    version="0.2.1">
+    version="0.3.0">
     <name>CDVBackgroundGeolocationFirebase</name>
     <description>Cordova Background Geolocation -- Firebase Adapter</description>
     <license>MIT</license>
@@ -21,7 +21,10 @@
         <clobbers target="window.BackgroundGeolocationFirebase" />
     </js-module>
 
-    <dependency id="cordova-support-google-services" version="~1.4.0"/>
+    <config-file target="config.xml" parent="/*">
+        <preference name="GradlePluginGoogleServicesEnabled" value="true" />
+        <preference name="GradlePluginGoogleServicesVersion" value="4.2.0" />
+    </config-file>
 
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
@@ -40,10 +43,11 @@
     </platform>
 
     <platform name="android">
-        <preference name="FIREBASE_CORE_VERSION" default="16.0.9" />
+
+        <preference name="FIREBASE_CORE_VERSION" default="18.0.0" />
         <framework src="com.google.firebase:firebase-core:$FIREBASE_CORE_VERSION" />
 
-        <preference name="FIREBASE_FIRESTORE_VERSION" default="19.0.2" />
+        <preference name="FIREBASE_FIRESTORE_VERSION" default="22.0.0" />
         <framework src="com.google.firebase:firebase-firestore:$FIREBASE_FIRESTORE_VERSION" />
 
         <resource-file src="src/android/libs/com/transistorsoft/tsfirebaseproxy" target="../../libs/com/transistorsoft/tsfirebaseproxy" />
