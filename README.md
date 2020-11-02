@@ -45,6 +45,33 @@ You also need to download **`google-services.json`** on Android and **`GoogleSer
 </platform>
 ```
 
+### Android
+
+- Add the following `<preference>` to your `config.xml`
+
+```xml
+<widget>
+  .
+  .
+  .
+  <preference name="GradlePluginGoogleServicesEnabled" value="true" />
+  <preference name="GradlePluginGoogleServicesVersion" value="4.2.0" />
+
+  <platform name="android">
+    <preference name="AndroidXEnabled" value="true" />
+    .
+    .
+    .
+  </platform>
+</widget>
+```
+
+- Add the following plugin to your app (prefix with `ionic` if using Ionic):
+
+```bash
+$ cordova plugin add cordova-plugin-androidx-adapter
+```
+
 ### iOS
 
 This plugin imports iOS `Firebase` dependencies via **Cocoapods**.  If you're unfamiliar with **Cocoapods**, [see here](https://guides.cocoapods.org/using/getting-started.html) to ensure you have it setup on your system.
@@ -164,10 +191,10 @@ export class HomePage {
     bgGeo.on('location', (location) => {
       console.log('[location] - ', location);
     });
-    
-    bgGeo.ready({           
+
+    bgGeo.ready({
       stopOnTerminate: false,
-      debug: true      
+      debug: true
     }, (state) => {
       if (!state.enabled) {
         bgGeo.start();
@@ -200,11 +227,11 @@ exports.createLocation = functions.firestore
   .document('locations/{locationId}')
   .onCreate((snap, context) => {
     const record = snap.data();
-    
+
     const location = record.location;
-    
+
     console.log('[data] - ', record);
-    
+
     return snap.ref.set({
       uuid: location.uuid,
       timestamp: location.timestamp,
@@ -213,7 +240,7 @@ exports.createLocation = functions.firestore
       longitude: location.coords.longitude,
       speed: location.coords.speed,
       heading: location.coords.heading,
-      altitude: location.coords.altitude,      
+      altitude: location.coords.altitude,
       event: location.event,
       battery_is_charging: location.battery.is_charging,
       battery_level: location.battery.level,
@@ -228,16 +255,16 @@ exports.createGeofence = functions.firestore
   .document('geofences/{geofenceId}')
   .onCreate((snap, context) => {
     const record = snap.data();
-    
+
     const location = record.location;
-  
+
     console.log('[data] - ', record);
-    
+
     return snap.ref.set({
       uuid: location.uuid,
       identifier: location.geofence.identifier,
       action: location.geofence.action,
-      timestamp: location.timestamp,      
+      timestamp: location.timestamp,
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
       extras: location.extras,

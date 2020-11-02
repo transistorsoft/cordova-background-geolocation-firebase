@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## [0.3.0] -- 2020-11-02
+* [Changed] Updated setup for AndroidX, `cordova-android >= 10` now natively supports preferences `GradlePluginGoogleServicesEnabled`, `GradlePluginGoogleServicesVersion`.
+
 ## [0.2.1] -- 2020-09-24
 * [Fixed][Android] Incorrect path to tslocationmanager.aar after upgrade to gradle:4.0.0.
 
