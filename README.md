@@ -57,20 +57,6 @@ You also need to download **`google-services.json`** on Android and **`GoogleSer
   <preference name="GradlePluginGoogleServicesEnabled" value="true" />
   <preference name="GradlePluginGoogleServicesVersion" value="4.2.0" />
 
-</widget>
-```
-
-#### `cordova-android >= 10`
-
-When using `cordova-android >= 10`, you must enable **AndroidX** for your application.
-
-- Add the following `<preference>` to you `config.xml`:
-
-```xml
-<widget>
-  .
-  .
-  .
   <platform name="android">
     <preference name="AndroidXEnabled" value="true" />
     .
